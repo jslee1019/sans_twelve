@@ -120,7 +120,7 @@ th.sans-col { color: var(--positive) !important; background: #e6f2ed !important;
 .expert-quote { border-left: 2px solid var(--ink); padding: 10px 0 10px 14px; margin-bottom: 12px; }
 .expert-text { font-size: 16px; font-style: italic; color: var(--ink); margin-bottom: 3px; font-weight: 400; }
 .expert-cite { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); }
-/* 테이블 스크롤 인디케이터 */
+/* 테이블 스크롤 인디케이터 — 스크롤 필요할 때만 표시 */
 .table-scroll { position: relative; }
 .table-scroll::after {
   content: '▶';
@@ -131,7 +131,7 @@ th.sans-col { color: var(--positive) !important; background: #e6f2ed !important;
   background: var(--ink);
   color: white;
   font-size: 9px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -147,7 +147,10 @@ th.sans-col { color: var(--positive) !important; background: #e6f2ed !important;
   background: linear-gradient(to right, transparent, rgba(250,250,248,0.92));
   pointer-events: none;
   z-index: 2;
+  display: none;
 }
+.table-scroll.needs-scroll::after { display: flex; }
+.table-scroll.needs-scroll::before { display: block; }
 footer { padding: 56px 0; background: var(--ink); }
 .footer-inner { max-width: var(--max); margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: flex-end; }
 .footer-brand { font-family: var(--font-display); font-size: 22px; color: white; margin-bottom: 6px; }
@@ -522,6 +525,7 @@ footer { padding: 56px 0; background: var(--ink); }
         <p class="product-name">Gut &amp; Immune</p>
         <p class="product-desc">장·면역 포뮬러. 프리바이오틱스, 베타글루칸, 차가버섯 고함량. 장 건강과 면역 기능 유지에 도움을 줄 수 있는 원료로 알려진 성분 중심. 소화 민감층 최적화.</p>
       </div>
+    </div><!-- /product-grid -->
     <hr class="rule">
     <h3>맛 개발 과정 — 검증의 기록</h3>
     <div class="validation-cols">
@@ -615,19 +619,42 @@ footer { padding: 56px 0; background: var(--ink); }
       </div>
     </div>
     <hr class="rule">
-    <h3>B2B 납품 파이프라인</h3>
+    <h3>트웰브 맞춤 스펙 제안</h3>
+    <div class="callout" style="margin-bottom:28px;">
+      <p>실제 조사에 기반한 트웰브 고객 페르소나 분석 결과, <strong>피부·역노화·밸런스</strong> 세 가지 키워드가 핵심 니즈로 확인됩니다. 트웰브 방문 고객의 주축은 <strong>30~40대 고소득 여성 + 웰니스 고관여 직장인</strong>으로, 이들의 구매 동기는 단순 카페음료를 넘어 '일상의 기능성 루틴'입니다.</p>
+    </div>
     <div class="table-scroll"><table class="data-table">
       <thead>
-        <tr><th>파트너</th><th>형태</th><th>진행 상태</th><th>예상 매출 규모</th></tr>
+        <tr><th>고객 유형</th><th>핵심 니즈</th><th>적용 가능 성분 (일반 기능성 원료)</th></tr>
       </thead>
       <tbody>
-        <tr><td class="em">삼성웰스토리</td><td>사내카페 납품</td><td>삼성벤처투자 투자 연계 논의 중</td><td>연 12억 (파일럿 기준)</td></tr>
-        <tr><td class="em">GS25</td><td>RTD 제품</td><td>2026년 여름 출시 목표</td><td>연 2억 (브랜드 노출 목적)</td></tr>
+        <tr>
+          <td class="em">30~40대 고소득 여성</td>
+          <td>피부 광채·탄력 유지</td>
+          <td>비타민C, 비타민E, 아연, 비오틴, 히알루론산</td>
+        </tr>
+        <tr>
+          <td class="em">항노화·바이오해킹 관심층</td>
+          <td>세포 활력·산화 스트레스 완화</td>
+          <td>비타민C, 비타민E, 셀레늄, 아연, 마그네슘</td>
+        </tr>
+        <tr>
+          <td class="em">웰니스 루틴 직장인</td>
+          <td>에너지 밸런스·피로 완화</td>
+          <td>비타민B군 (B1·B2·B6·B12), 마그네슘, 판토텐산</td>
+        </tr>
+        <tr>
+          <td class="em">임산부·카페인 민감층</td>
+          <td>무카페인 + 면역·컨디션 유지</td>
+          <td>비타민C, 비타민D, 아연, 엽산, 칼슘</td>
+        </tr>
       </tbody>
     </table></div>
-    <div class="func-note" style="margin-top:28px;">
+    <p style="font-size:13px;color:var(--ink-light);margin-top:8px;">구체적인 포뮬러 구성은 트웰브와 협의 후 확정. 기존 원더바 원료 유용성 표현 방식과 동일하게 커뮤니케이션 가능.</p>
+    <hr class="rule">
+    <div class="func-note" style="margin-top:0;">
       <p class="func-note-title">납품 단가 안내</p>
-      <p>현재 공장 준공 일정에 맞춰 단가를 확정 중입니다. 기능성 성분 구성에 따라 차이가 있으나, <strong>16oz 잔당 700~900원 수준</strong>을 목표로 하고 있습니다. 원두 커피 대비 원재료 수급이 기후 영향을 받지 않아 가격 안정성이 높습니다. 기능성 포뮬러 추가 시에도 일반적인 기능성 원료 범위 내에서라면 이 단가 내 조율이 가능합니다.</p>
+      <p>현재 공장 준공 일정에 맞춰 단가를 확정 중입니다. 기능성 성분 구성에 따라 차이가 있으나, <strong>16oz 잔당 700~900원 수준</strong>을 목표로 하고 있습니다. 원두 커피 대비 원재료 수급이 기후 영향을 받지 않아 가격 안정성이 높습니다. 기능성 포뮬러 추가 시에도 일반적인 기능성 원료(비타민·미네랄류) 범위 내에서라면 이 단가 내 조율이 가능합니다.</p>
     </div>
   </div>
 </section>
@@ -722,7 +749,24 @@ footer { padding: 56px 0; background: var(--ink); }
   </div>
 </footer>
 <script>
-(function(){
+// 테이블 스크롤 화살표 — 스크롤 필요할 때만 표시
+function updateScrollIndicators() {
+  document.querySelectorAll('.table-scroll').forEach(function(wrap) {
+    var needsScroll = wrap.scrollWidth > wrap.clientWidth + 2;
+    var atEnd = wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 4;
+    if (needsScroll && !atEnd) {
+      wrap.classList.add('needs-scroll');
+    } else {
+      wrap.classList.remove('needs-scroll');
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', updateScrollIndicators);
+window.addEventListener('resize', updateScrollIndicators);
+document.querySelectorAll('.table-scroll').forEach(function(wrap) {
+  wrap.addEventListener('scroll', updateScrollIndicators, {passive: true});
+});
+</script>
   var ids = ['summary','market','players','sans','twelve','partnership','traction','conclusion'];
   var links = {};
   ids.forEach(function(id){
