@@ -58,7 +58,7 @@ hr.rule-heavy { border: none; border-top: 1px solid var(--ink); margin: 36px 0; 
 .verdict p { font-size: 13px; }
 .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
 .review { padding: 16px 20px; border: 1px solid var(--rule); }
-.review-rating { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+.review-rating { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 10px; }
 .review.neg .review-rating { color: var(--negative); } .review.pos .review-rating { color: var(--positive); }
 .review blockquote { font-size: 13px; font-style: italic; color: var(--ink-mid); line-height: 1.65; margin-bottom: 8px; }
 .review cite { font-size: 10px; color: var(--ink-light); font-style: normal; }
@@ -105,6 +105,633 @@ hr.rule-heavy { border: none; border-top: 1px solid var(--ink); margin: 36px 0; 
 .func-note p { font-size: 13.5px; color: var(--ink-mid); }
 .func-example { font-size: 12.5px; color: var(--ink-light); font-style: italic; margin-top: 10px; padding-left: 14px; border-left: 2px solid var(--rule); line-height: 1.8; }
 .conclusion-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 28px 0; }
+.conc-card { background: var(--bg); padding: 28px 32px; display: grid; grid-template-columns: 46px 1fr; gap: 20px; align-items: start; }
+.conc-num { font-family: var(--font-display); font-style: italic; font-size: 36px; color: var(--rule); line-height: 1; }
+.conc-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+.conc-body { font-size: 13.5px; color: var(--ink-mid); line-height: 1.75; }
+/* sub-row */
+.sub-row td { padding: 4px 13px 10px; font-size: 11.5px; color: var(--ink-light); border-bottom: 1px solid var(--rule); font-style: italic; }
+/* SANS 강조 열 */
+.sans-col { background: #f0f7f4 !important; font-weight: 500 !important; }
+th.sans-col { color: var(--positive) !important; background: #e6f2ed !important; }
+/* expert quote */
+.expert-quote { border-left: 2px solid var(--ink); padding: 10px 0 10px 14px; margin-bottom: 12px; }
+.expert-text { font-size: 14px; font-style: italic; color: var(--ink); margin-bottom: 3px; font-weight: 400; }
+.expert-cite { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); }
+/* 테이블 스크롤 인디케이터 */
+.table-scroll { position: relative; }
+.table-scroll::after {
+  content: '▶';
+  position: absolute;
+  top: 50%; right: 0;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  background: var(--ink);
+  color: white;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  line-height: 1;
+}
+.table-scroll::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 48px; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(250,250,248,0.92));
+  pointer-events: none;
+  z-index: 2;
+}
+footer { padding: 56px 0; background: var(--ink); }
+.footer-inner { max-width: var(--max); margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: flex-end; }
+.footer-brand { font-family: var(--font-display); font-size: 22px; color: white; margin-bottom: 6px; }
+.footer-sub { font-size: 12px; color: rgba(255,255,255,0.4); }
+.footer-meta { font-size: 11px; color: rgba(255,255,255,0.3); text-align: right; line-height: 1.9; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.fade { animation: fadeUp 0.55s ease both; }
+.fade-1 { animation-delay: 0.08s; } .fade-2 { animation-delay: 0.2s; } .fade-3 { animation-delay: 0.32s; } .fade-4 { animation-delay: 0.44s; }
+/* ── MOBILE (세로) ─────────────────────────────────── */
+@media (max-width: 600px) {
+  .wrap, .nav-inner { padding: 0 18px; }
+  .nav-links { display: none; }
+  section { padding: 52px 0; }
+  #cover { padding: 48px 0 40px; }
+  .display { font-size: clamp(30px, 8.5vw, 44px); }
+  .cover-sub { font-size: 14.5px; }
+  /* KPI 2x2 */
+  .kpi-strip { grid-template-columns: 1fr 1fr; }
+  .kpi { border-bottom: 1px solid var(--rule); padding: 18px 14px; }
+  .kpi:nth-child(2) { border-right: none; }
+  .kpi:nth-child(3) { border-bottom: none; }
+  .kpi:nth-child(4) { border-bottom: none; border-right: none; }
+  .kpi-value { font-size: 19px; }
+  .kpi-label { font-size: 10.5px; }
+  /* Single column */
+  .cols-2, .verdict-row, .review-grid, .product-grid { grid-template-columns: 1fr; }
+  /* Verdict stacked */
+  .verdict-row { background: var(--bg); gap: 0; }
+  .verdict { border-bottom: 1px solid var(--rule); }
+  .verdict:last-child { border-bottom: none; }
+  /* Info list: label 위, 값 아래 */
+  .info-list li { grid-template-columns: 1fr; gap: 3px; }
+  .info-list .lbl { font-size: 10px; }
+  .info-list .val { font-size: 13px; }
+  /* Table: 가로 스크롤 — 패딩 안쪽 유지 */
+  .table-scroll { margin-left: -18px; margin-right: -18px; padding-left: 18px; padding-right: 18px; }
+  /* Steps */
+  .step { grid-template-columns: 32px 1fr; gap: 12px; }
+  .step-num { font-size: 19px; }
+  /* Conc card */
+  .conc-card { grid-template-columns: 32px 1fr; gap: 12px; padding: 20px 16px; }
+  .conc-num { font-size: 24px; }
+  /* Pull quote */
+  .pull-quote blockquote { font-size: 16px; }
+  /* Footer */
+  .footer-inner { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .footer-meta { text-align: left; }
+  /* Misc */
+  .callout { padding: 14px 16px; }
+  .func-note { padding: 14px 16px; }
+  h2 { font-size: 21px; }
+  h3 { font-size: 10px; }
+  p, .step-body, .conc-body { font-size: 13.5px; }
+}
+
+/* ── 가로모드 (landscape) ─────────────────────────── */
+@media (max-width: 900px) and (orientation: landscape) {
+  .wrap, .nav-inner { padding: 0 28px; }
+  .nav-links { display: none; }
+  section { padding: 52px 0; }
+  /* KPI 가로 4열 유지하되 작게 */
+  .kpi { padding: 16px 14px; }
+  .kpi-value { font-size: 20px; }
+  .kpi-label { font-size: 10px; }
+  /* 2열 그리드는 유지 */
+  .cols-2 { gap: 20px; }
+  /* 테이블 폰트 줄여서 안에 들어오게 */
+  .data-table { font-size: 11.5px; min-width: 0; }
+  .data-table th { font-size: 9px; padding: 8px 10px; }
+  .data-table td { padding: 9px 10px; font-size: 11.5px; }
+  .comp-table { font-size: 11.5px; min-width: 0; }
+  .comp-table th { font-size: 9px; padding: 8px 10px; }
+  .comp-table td { padding: 9px 10px; font-size: 11.5px; }
+  /* 테이블 스크롤 래퍼 */
+  .table-scroll { margin-left: -28px; margin-right: -28px; padding-left: 28px; padding-right: 28px; }
+  /* verdict, review 가로모드엔 2열 유지 */
+  .verdict-row { grid-template-columns: 1fr 1fr 1fr; }
+  .review-grid { grid-template-columns: 1fr 1fr; }
+  /* product 2열 유지 */
+  .product-grid { grid-template-columns: 1fr 1fr; }
+  /* info-list 좌우 유지 */
+  .info-list li { grid-template-columns: 100px 1fr; }
+  h2 { font-size: 22px; }
+  p { font-size: 13.5px; }
+}
+.contact-section { padding: 32px 0 8px; }
+.contact-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 20px; }
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 20px; }
+.contact-card { background: var(--bg); padding: 20px 22px; }
+.contact-role { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px; }
+.contact-name { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+.contact-info { font-size: 12.5px; color: var(--ink-mid); margin-bottom: 2px; letter-spacing: 0.02em; }
+.contact-conf { font-size: 12px; color: var(--ink-light); }
+@media (max-width: 600px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-card { border-bottom: 1px solid var(--rule); }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#cover" class="nav-brand">SANS × TWELVE</a>
+    <ul class="nav-links">
+      <li><a href="#market">시장</a></li>
+      <li><a href="#players">경쟁사</a></li>
+      <li><a href="#sans">SANS</a></li>
+      <li><a href="#partnership">파트너십</a></li>
+      <li><a href="#conclusion">결론</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="cover">
+  <div class="wrap">
+    <p class="cover-eyebrow fade fade-1">Partnership Proposal · 2026</p>
+    <h1 class="display fade fade-2">버섯커피 시장의<br><em>유일한 해답</em></h1>
+    <p class="cover-sub fade fade-3">글로벌 Functional Coffee 시장 분석과 SANS 도입 제안 —<br>하우스오브신세계 청담 트웰브 카페 파트너십 검토용</p>
+    <div class="kpi-strip fade fade-4">
+      <div class="kpi"><div class="kpi-value">$3.23B</div><div class="kpi-label">글로벌 버섯커피 시장<br>2025년 기준</div></div>
+      <div class="kpi"><div class="kpi-value">$300M+</div><div class="kpi-label">RYZE 2025년 연매출 추산<br>약 4,350억 원 (Forbes)</div></div>
+      <div class="kpi"><div class="kpi-value">+900%</div><div class="kpi-label">SANS 신세계 스위트파크<br>오픈 대비 매출 성장</div></div>
+      <div class="kpi"><div class="kpi-value">53억</div><div class="kpi-label">SANS Pre-A 투자 완료<br>신세계 시그나이트 포함</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 -->
+<section id="summary">
+  <div class="wrap">
+    <p class="chapter-num">01 — Executive Summary</p>
+    <h2>세 문장으로 요약</h2>
+    <div class="verdict-row">
+      <div class="verdict">
+        <p class="verdict-title opp">시장 기회</p>
+        <p>버섯커피는 미국에서 이미 연간 수천억 원 규모를 형성했으며, RYZE 한 브랜드만으로 2025년 연간 약 $300M(약 4,350억 원)에 달합니다(Forbes, 2026.01). 파우더 세그먼트 중심의 D2C 모델로 빠르게 성장하고 있습니다.</p>
+      </div>
+      <div class="verdict">
+        <p class="verdict-title lim">기존 브랜드의 한계</p>
+        <p>현존하는 모든 버섯커피 브랜드는 원두를 배제하지 못했습니다. 버섯의 흙냄새, 카페인 잔존, 용해 불량 — 소비자 리뷰에서 반복되는 세 가지 불만이 여전히 해결되지 않고 있습니다.</p>
+      </div>
+      <div class="verdict">
+        <p class="verdict-title sol">SANS의 해법</p>
+        <p>원두 제로 + 발효로 버섯 이취 완전 제거 + 커피 향미 분자 수준 재현. WBC 챔피언 2명이 공개 인증한 유일한 대체커피입니다. 신세계 스위트파크 입점 후 오픈 대비 +900% 성장하고 있습니다.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <p>트웰브가 지향하는 '신라면·코카콜라 없는 웰니스 공간'에서, 기존 커피 브랜드들이 하지 못하는 <strong>웰니스 카페 카테고리의 빈자리를 SANS가 정확히 채웁니다.</strong> 원두·카페인·설탕 없는 발효 기반 기능성 커피는 트웰브의 큐레이션 철학과 완벽하게 맞닿아 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="market">
+  <div class="wrap">
+    <p class="chapter-num">02 — 글로벌 시장 현황</p>
+    <h2>이미 3조 원을 넘은<br>버섯커피 시장</h2>
+    <div class="kpi-strip" style="margin:28px 0;">
+      <div class="kpi"><div class="kpi-value">$3.23B</div><div class="kpi-label">2025년 글로벌 시장</div></div>
+      <div class="kpi"><div class="kpi-value">$4.7B+</div><div class="kpi-label">2030년 전망 (CAGR 5.5%)</div></div>
+      <div class="kpi"><div class="kpi-value">64%</div><div class="kpi-label">파우더 세그먼트 점유율</div></div>
+      <div class="kpi"><div class="kpi-value">$528M</div><div class="kpi-label">미국 단독 시장 (2023)</div></div>
+    </div>
+    <p>복수의 글로벌 리서치 기관(Grand View Research, Precedence Research, TechSci Research)이 연 5~6%의 안정적 성장세를 공통으로 예측하고 있습니다. 특히 온라인 채널(CAGR 6.3%)과 사쉐·파우더 세그먼트(CAGR 6.2%)의 성장이 두드러집니다.</p>
+    <hr class="rule">
+    <h3>아마존 버섯커피 카테고리 월 매출 추산 — 2025년 12월 기준</h3>
+    <div class="table-scroll"><table class="data-table">
+      <thead>
+        <tr><th>브랜드</th><th>아마존 런칭</th><th>월 검색량</th><th>월 매출 추산</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="em">RYZE</td><td>2024.04</td><td>1,410,867</td><td class="em">$3,674,250</td></tr>
+        <tr class="sub-row"><td colspan="4">2025년 연 ~$300M 추산 (Forbes) · 2026.01 Target 1,900개 매장 전국 입점</td></tr>
+        <tr><td>Everyday Dose</td><td>2023.07</td><td>90,530</td><td>$899,700</td></tr>
+        <tr class="sub-row"><td colspan="4">2025.12 자사몰 단독 $8.0M · 전분기 대비 +40% 성장 (Grips Intelligence)</td></tr>
+        <tr><td>CUPPA</td><td>2024.09</td><td>85,864</td><td>$494,417</td></tr>
+        <tr class="sub-row"><td colspan="4">2024년 9월 런칭 신흥 브랜드</td></tr>
+        <tr><td>Four Sigmatic</td><td>2015</td><td>77,190</td><td>$344,700</td></tr>
+        <tr class="sub-row"><td colspan="4">카테고리 개척자, 성장 정체</td></tr>
+        <tr><td>MUD/WTR</td><td>2023.07</td><td>23,772</td><td>$56,387</td></tr>
+        <tr class="sub-row"><td colspan="4">2024년 자사몰 전년 대비 –50% 급감</td></tr>
+        <tr class="total"><td>카테고리 합계</td><td></td><td>1,752,046</td><td>$5,698,770 · 월 약 82억 원</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <p>RYZE는 단 $2.15M(약 31억 원)의 투자로 2025년 연간 <strong>약 $300M(약 4,350억 원)</strong>의 매출을 달성한 것으로 추산됩니다(Forbes, January 2026). Everyday Dose는 2025년 12월 자사몰 단독으로 $8,014,248(약 116억 원)을 기록, 직전 3개월 대비 40% 성장세를 이어가고 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="players">
+  <div class="wrap">
+    <p class="chapter-num">03 — 주요 플레이어 분석</p>
+    <h2>숫자 뒤에 숨은<br>소비자의 진심</h2>
+    <p>시장 데이터는 버섯커피의 폭발적 성장을 증명합니다. 그러나 수만 건의 소비자 리뷰는 공통된 불만을 드러냅니다. 바로 여기에 SANS가 진입하는 기회가 있습니다.</p>
+    <hr class="rule">
+    <h3>RYZE — 카테고리 1위, 그러나 미완성된 맛</h3>
+    <div class="review-grid">
+      <div class="review neg">
+        <p class="review-rating">★☆☆☆☆ · 113명 도움됨</p>
+        <blockquote>"Not my type of coffee, and taste like vomit. We held a tasting party. All of my family and friends hated it."</blockquote>
+        <cite>Amazon, August 2025</cite>
+      </div>
+      <div class="review neg">
+        <p class="review-rating">★☆☆☆☆ · 199명 도움됨 — 최다 추천</p>
+        <blockquote>"RYZE but don't shine. From the moment she opened the bag, she was hit with a smell that can only be described as... baby vomit."</blockquote>
+        <cite>Amazon, January 2025</cite>
+      </div>
+      <div class="review neg">
+        <p class="review-rating">★☆☆☆☆ · 92명 도움됨</p>
+        <blockquote>"Seems to be false advertising, and probably artificially hyped. I have noticed nothing yet after a week."</blockquote>
+        <cite>Amazon, September 2025</cite>
+      </div>
+      <div class="review pos">
+        <p class="review-rating">★★★★★ · 40명 도움됨</p>
+        <blockquote>"I feel more balanced and less jittery. I genuinely feel sharper and more clear-headed throughout the day."</blockquote>
+        <cite>Amazon, November 2025</cite>
+      </div>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink-light);">Amazon 리뷰 크롤링 데이터 기준 · 2025.12 수집</p>
+    <hr class="rule">
+    <h3>MUD/WTR — 철학은 훌륭하나 시장이 외면</h3>
+    <div class="review-grid">
+      <div class="review neg">
+        <p class="review-rating">★☆☆☆☆ · 200명 도움됨 — 최다 추천</p>
+        <blockquote>"Taste lives up to its name — MUD. I opened the lid and discovered bugs that had hatched. Not worth my money."</blockquote>
+        <cite>Amazon, November 2023</cite>
+      </div>
+      <div class="review neg">
+        <p class="review-rating">★☆☆☆☆ · 12명 도움됨</p>
+        <blockquote>"Grainy taste and if I ever did try pond water I'm sure it tastes like this stuff. It literally feels like dirt in your mouth."</blockquote>
+        <cite>Amazon, October 2025</cite>
+      </div>
+    </div>
+    <hr class="rule">
+    <h3>Everyday Dose — 신흥 강자의 성공과 한계</h3>
+    <div class="review-grid">
+      <div class="review pos">
+        <p class="review-rating">★★★★★ · 23명 도움됨</p>
+        <blockquote>"No earthy or mushroom taste at all! Great hot or cold! Customer for life!"</blockquote>
+        <cite>Amazon, November 2025</cite>
+      </div>
+      <div class="review neg">
+        <p class="review-rating">★☆☆☆☆ · 다수 도움됨</p>
+        <blockquote>"Horrible customer service. They charged me for a subscription I never signed up for. Impossible to cancel. Avoid."</blockquote>
+        <cite>Amazon / Trustpilot, 2025</cite>
+      </div>
+    </div>
+    <p>2025년 12월 자사몰 단독 $8.0M을 기록했지만, 원두가 포함되어 카페인 부작용을 완전히 해결하지 못했습니다. 고객 서비스와 구독 취소 관련 불만도 반복적으로 등장하는 약점입니다.</p>
+    <hr class="rule">
+    <h3>구조적 한계 비교</h3>
+    <div class="table-scroll"><table class="comp-table">
+      <thead>
+        <tr><th>비교 항목</th><th class="sans-col">SANS</th><th>RYZE</th><th>MUD/WTR</th><th>Everyday Dose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>원두 포함</td><td class="pos sans-col">원두 Zero</td><td class="neg">50%+ 혼합</td><td>홍차 기반</td><td class="neg">원두 포함</td></tr>
+        <tr><td>카페인</td><td class="pos sans-col">완전 제로</td><td class="neg">불완전 제거</td><td>35mg 잔존</td><td class="neg">불완전 제거</td></tr>
+        <tr><td>버섯 이취</td><td class="pos sans-col">발효로 완전 제거</td><td class="neg">잔존</td><td class="neg">잔존</td><td>일부 해결</td></tr>
+        <tr><td>커피 메뉴 구현</td><td class="pos sans-col">아메리카노·에스프레소 완전 재현</td><td>제한적</td><td class="neg">불가 (코코아 기반)</td><td>부분적</td></tr>
+        <tr><td>최근 성과</td><td class="pos sans-col">스위트파크 오픈 대비 +900%</td><td>연 ~$300M, Target 입점</td><td class="neg">자사몰 –50% 급감</td><td>2025.12 월 $8M</td></tr>
+      </tbody>
+    </table>
+</div>  </div>
+</section>
+
+<!-- 05 -->
+<section id="sans">
+  <div class="wrap">
+    <p class="chapter-num">04 — SANS</p>
+    <h2>세계 유일의<br>원두 없는 커피</h2>
+    <div class="cols-2">
+      <div>
+        <h3>회사 개요</h3>
+        <ul class="info-list">
+          <li><span class="lbl">설립</span><span class="val">2019년</span></li>
+          <li><span class="lbl">CEO</span><span class="val">김경훈 — 서울대 M.S-Ph.D, SCA 바리스타·로스터·센서리 자격</span></li>
+          <li><span class="lbl">CSO</span><span class="val">김윤석 박사 — 스탠퍼드대 Ph.D, Nature 제1저자 / 스위스 연방공대 교수</span></li>
+          <li><span class="lbl">COO</span><span class="val">이준상 — 연세대학교 MBA, 회사 운영 총괄</span></li>
+          <li><span class="lbl">CFO</span><span class="val">Bryan Choe — Univ. of Michigan, 전 Evercore M&amp;A 뉴욕</span></li>
+          <li><span class="lbl">임직원</span><span class="val">정규직 21명 (R&amp;D·제조·운영·현장)</span></li>
+          <li><span class="lbl">오프라인</span><span class="val">익선동 플래그십, 강남 신세계 스위트파크, 고양 스타필드</span></li>
+          <li><span class="lbl">제조원</span><span class="val">SANS FOUNDRY (연 400톤 CAPA, HACCP 준비 중)</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>투자 현황 — Pre-A 총 53억 완료</h3>
+        <table class="invest-table">
+          <tbody>
+            <tr><td>신세계 시그나이트</td><td>15억</td><td style="font-size:12px;color:var(--ink-light);padding-left:10px;">그룹 CVC</td></tr>
+            <tr><td>스톤브릿지벤처스</td><td>10억</td><td style="font-size:12px;color:var(--ink-light);padding-left:10px;">국내 주요 VC</td></tr>
+            <tr><td>디캠프</td><td>10억</td><td style="font-size:12px;color:var(--ink-light);padding-left:10px;">스타트업 지원기관</td></tr>
+            <tr><td>삼성벤처투자</td><td>10억</td><td style="font-size:12px;color:var(--ink-light);padding-left:10px;">삼성웰스토리 연계</td></tr>
+            <tr><td>IBK기업은행</td><td>5억</td><td style="font-size:12px;color:var(--ink-light);padding-left:10px;">스톤브릿지 매칭</td></tr>
+            <tr><td>더벤처스</td><td>3억</td><td></td></tr>
+            <tr class="total"><td>합계</td><td>53억</td><td></td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:var(--ink-light);margin-top:8px;">초기 투자: 네이버스노우 김창욱, 네이버웹툰 김준구, 라인프렌즈 김성훈 대표</p>
+      </div>
+    </div>
+    <hr class="rule">
+    <h3>핵심 기술 — 3단계</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <p class="step-title">Coffee Molecular Mapping</p>
+          <p class="step-body">커피 향기 분자 100종 이상을 매핑·분류합니다. 화학적으로 합성하기 어려운 분자를 발효 공정으로 자연 생성하여 원두 없이 '분자적 동일성'을 확보합니다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <p class="step-title">한국 전통 발효 기술의 현대화</p>
+          <p class="step-body">Lactic-acid 발효로 버섯의 흙냄새를 완전히 제거하고 기능성만 추출합니다. pH·온도·시간·효모균주·허브비율 5가지 변수를 정밀 제어해 스페셜티 커피급 다양한 풍미를 구현합니다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <p class="step-title">기능성 원료의 자유로운 확장</p>
+          <p class="step-body">커피의 맛을 유지하면서 다양한 기능성 성분을 자유롭게 추가할 수 있는 구조입니다. 홍삼·동충하초·노루궁뎅이·영지버섯·콜라겐·아답토젠 등 원료별 유용성을 살리되 발효 공정을 통해 이취 없이 통합되며, 일관된 품질로 관리가 용이합니다.</p>
+        </div>
+      </div>
+    </div>
+    <hr class="rule">
+    <h3>기능성 표현 가능 범위</h3>
+    <div class="func-note">
+      <p class="func-note-title">국내 일반식품 기능성 표시 제도 기준 (식약처 고시 제2024-62호)</p>
+      <p>건강기능식품 인정 원료를 사용하는 일반식품은 원료의 유용성을 표시할 수 있습니다. 트웰브 원더바의 원료 유용성 커뮤니케이션 방식과 동일하게, SANS의 발효 원료들도 아래와 같은 표현이 가능합니다.</p>
+      <p class="func-example">
+        "집중력에 도움을 줄 수 있는 원료로 알려진 홍삼을 함유하고 있습니다"<br>
+        "피로 회복에 도움을 줄 수 있는 원료로 알려진 동충하초 추출물을 함유합니다"<br>
+        "수면의 질 개선에 도움을 줄 수 있는 원료로 알려진 레몬밤을 함유하고 있습니다"
+      </p>
+    </div>
+    <h3 style="margin-top:32px;">제품 라인업</h3>
+    <div class="product-grid">
+      <div class="product-card">
+        <p class="product-tag launched">개발 완료</p>
+        <p class="product-name">Focus &amp; Energy</p>
+        <p class="product-desc">집중력·지속 에너지 포뮬러. 홍삼, 동충하초, 노루궁뎅이버섯, 차가버섯, 과라나 추출물 함유. 인지 기능과 활력 지원에 도움을 줄 수 있는 원료로 알려진 성분 중심 설계.</p>
+      </div>
+      <div class="product-card">
+        <p class="product-tag launched">개발 완료</p>
+        <p class="product-name">Balance &amp; Restore</p>
+        <p class="product-desc">균형·회복 포뮬러. 레몬밤, 영지버섯, 타트체리, 대추, 라벤더 함유. 카페인 Zero. 이완과 편안한 수면에 도움을 줄 수 있는 원료로 알려진 성분 중심. 오후·저녁 음용 최적화.</p>
+      </div>
+      <div class="product-card">
+        <p class="product-tag upcoming">추후 예정</p>
+        <p class="product-name">Skin &amp; Glow</p>
+        <p class="product-desc">피부 광채 포뮬러. 콜라겐, 글루타치온, 비타민C 고함량. 피부 탄력과 광채에 도움을 줄 수 있는 원료로 알려진 성분 중심. 뷰티 웰니스 소비층 타겟.</p>
+      </div>
+      <div class="product-card">
+        <p class="product-tag upcoming">추후 예정</p>
+        <p class="product-name">Calm &amp; Sleep</p>
+        <p class="product-desc">수면 지원 포뮬러. 아답토젠 블렌드, 멜라토닌, L-테아닌, 마그네슘 함유. 스트레스 완화와 수면의 질 개선에 도움을 줄 수 있는 원료로 알려진 성분 중심 설계.</p>
+      </div>
+      <div class="product-card">
+        <p class="product-tag upcoming">추후 예정</p>
+        <p class="product-name">Change &amp; Longevity</p>
+        <p class="product-desc">항노화 포뮬러. NR(니코틴아마이드 리보사이드), 레스베라트롤, 코엔자임Q10 등 고기능성 성분 투여. 세포 수준의 활력 지원에 도움을 줄 수 있는 원료 중심.</p>
+      </div>
+      <div class="product-card">
+        <p class="product-tag upcoming">추후 예정</p>
+        <p class="product-name">Gut &amp; Immune</p>
+        <p class="product-desc">장·면역 포뮬러. 프리바이오틱스, 베타글루칸, 차가버섯 고함량. 장 건강과 면역 기능 유지에 도움을 줄 수 있는 원료로 알려진 성분 중심. 소화 민감층 최적화.</p>
+      </div>
+    <hr class="rule">
+    <h3>맛 개발 과정 — 검증의 기록</h3>
+    <div class="cols-2">
+      <div>
+        <h3>3,000명 블라인드 테스트</h3>
+        <ul class="info-list">
+          <li><span class="lbl">참여자</span><span class="val" style="font-size:20px;font-family:var(--font-display);">3,000명+</span></li>
+          <li><span class="lbl">기존 커피보다<br>맛있다 응답</span><span class="val" style="font-size:20px;font-family:var(--font-display);">96%</span></li>
+          <li><span class="lbl">대체커피<br>알아차림</span><span class="val" style="font-size:20px;font-family:var(--font-display);">0명</span></li>
+          <li><span class="lbl">NPS</span><span class="val" style="font-size:20px;font-family:var(--font-display);">9.2점<span style="font-size:13px;color:var(--ink-light);"> 업계 평균 +1.2</span></span></li>
+          <li><span class="lbl">레시피 개선</span><span class="val">30회 이상 반복 — 이 수치가 SANS 맛 완성도의 증거</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>세계 최고 전문가의 검증</h3>
+        <div class="expert-quote">
+          <p class="expert-text">"놀랍게도 커피의 맛뿐 아니라 질감까지 구현했다."</p>
+          <p class="expert-cite">2023 WBC 월드 바리스타 챔피언</p>
+        </div>
+        <div class="expert-quote">
+          <p class="expert-text">"커피 산업을 뒤흔들 혁신이 나타났다."</p>
+          <p class="expert-cite">2024 WBC 월드 바리스타 챔피언</p>
+        </div>
+        <div class="expert-quote">
+          <p class="expert-text">"First I was skeptical. Thanks for proving me wrong!"</p>
+          <p class="expert-cite">2024 싱가포르 컵 테이스터 챔피언</p>
+        </div>
+        <p style="font-size:12px;color:var(--ink-light);margin-top:14px;">KBS·SBS·중앙일보·헤럴드경제·독일 ProSieben 보도</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05b -->
+<section id="twelve">
+  <div class="wrap">
+    <p class="chapter-num">05 — 트웰브(TWELVE)</p>
+    <h2>트웰브 —<br>웰니스 큐레이션의 새로운 기준</h2>
+    <div class="cols-2">
+      <div>
+        <h3>기본 정보</h3>
+        <ul class="info-list">
+          <li><span class="lbl">오픈</span><span class="val">2025년 12월 10일</span></li>
+          <li><span class="lbl">위치</span><span class="val">서울 강남구 청담동 (하우스오브신세계 청담 B1)</span></li>
+          <li><span class="lbl">규모</span><span class="val">총 1,500평 — 지하 1층 식품관 + 지상 1층 패션·다이닝</span></li>
+          <li><span class="lbl">콘셉트</span><span class="val">'패션 매거진 같은 식품관' — 웰니스 큐레이션</span></li>
+          <li><span class="lbl">상품 구성</span><span class="val">웰니스 그로서리 6,000여 종 (12가지 기준 선별)</span></li>
+          <li><span class="lbl">없는 것</span><span class="val">신라면, 불닭볶음면, 코카콜라</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>오픈 성과</h3>
+        <ul class="info-list">
+          <li><span class="lbl">첫 주 매출</span><span class="val">계획 대비 1.5배 달성</span></li>
+          <li><span class="lbl">2040 고객</span><span class="val">전체의 60%</span></li>
+          <li><span class="lbl">트웰브 원더바</span><span class="val">즉석 스무디·착즙주스 40종 (11,000~28,000원)</span></li>
+          <li><span class="lbl">큐레이션 기준</span><span class="val">'뿌리와의 여정' '균형과 순환' 등 현대인 웰니스 테마</span></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="rule">
+    <p>트웰브 원더바는 인삼의 활력 보조, 마카의 에너지 지원, 햄프시드의 단백질 공급, 케일의 영양 균형 등 각 원료의 유용성을 전면에 내세우고 있습니다. 국내 일반식품 기능성 표시 제도(식약처 고시 제2024-62호)에 따라 원료의 유용성 표현이 가능한 방식입니다. <strong>SANS는 홍삼, 동충하초, 노루궁뎅이버섯, 차가버섯, 레몬밤, 영지버섯 등 기능성 연구가 축적된 원료들을 발효 공정으로 통합했으며, 트웰브 원더바와 동일한 방식의 원료 유용성 표현이 가능합니다.</strong></p>
+  </div>
+</section>
+
+<!-- 06 -->
+<section id="partnership">
+  <div class="wrap">
+    <p class="chapter-num">06 — 파트너십 시너지</p>
+    <h2>왜 이 조합이<br>필연인가</h2>
+    <div class="cols-2" style="margin:28px 0;">
+      <div>
+        <h3>TWELVE가 지향하는 것</h3>
+        <ul class="info-list">
+          <li><span class="lbl">공간 철학</span><span class="val">신라면·코카콜라 없는 웰니스 큐레이션</span></li>
+          <li><span class="lbl">주요 고객</span><span class="val">2040세대 웰니스 고관여층 (60%)</span></li>
+          <li><span class="lbl">차별화 전략</span><span class="val">어디서도 볼 수 없는 단독 상품군</span></li>
+          <li><span class="lbl">브랜드 가치</span><span class="val">K-웰니스·K-발효 기술 철학</span></li>
+          <li><span class="lbl">입점 기준</span><span class="val">12가지 기준 — 기능성·완성도·브랜드 철학</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>SANS가 제공하는 것</h3>
+        <ul class="info-list">
+          <li><span class="lbl">제품</span><span class="val">원두·카페인·설탕 없는 기능성 버섯 커피</span></li>
+          <li><span class="lbl">타겟 일치</span><span class="val">카페인 민감층·임산부·웰니스 지향층</span></li>
+          <li><span class="lbl">단독성</span><span class="val">글로벌 유일 100% 대체커피 — 경쟁 차별화</span></li>
+          <li><span class="lbl">기술 기반</span><span class="val">한국 전통 발효 현대화 — K-Food 정수</span></li>
+          <li><span class="lbl">검증</span><span class="val">NPS 9.2 · WBC 챔피언 2명 · 53억 투자</span></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="rule">
+    <h3>B2B 납품 파이프라인</h3>
+    <div class="table-scroll"><table class="data-table">
+      <thead>
+        <tr><th>파트너</th><th>형태</th><th>진행 상태</th><th>예상 매출 규모</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="em">삼성웰스토리</td><td>사내카페 납품</td><td>삼성벤처투자 투자 연계 논의 중</td><td>연 12억 (파일럿 기준)</td></tr>
+        <tr><td class="em">GS25</td><td>RTD 제품</td><td>2026년 여름 출시 목표</td><td>연 2억 (브랜드 노출 목적)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="func-note" style="margin-top:28px;">
+      <p class="func-note-title">납품 단가 안내</p>
+      <p>현재 공장 준공 일정에 맞춰 단가를 확정 중입니다. 기능성 성분 구성에 따라 차이가 있으나, <strong>16oz 잔당 700~900원 수준</strong>을 목표로 하고 있습니다. 원두 커피 대비 원재료 수급이 기후 영향을 받지 않아 가격 안정성이 높습니다. 기능성 포뮬러 추가 시에도 일반적인 기능성 원료 범위 내에서라면 이 단가 내 조율이 가능합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="traction">
+  <div class="wrap">
+    <p class="chapter-num">07 — 트랙션</p>
+    <h2>시장이 이미<br>답했다</h2>
+    <h3>신세계 강남 스위트파크 월 매출 추이</h3>
+    <div class="table-scroll"><table class="data-table">
+      <thead>
+        <tr><th>오픈 (8월)</th><th>9월</th><th>10월</th><th>11월</th><th>12월</th><th>2026년 3월 달성</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>690만 원</td><td>3,077만 원</td><td>3,859만 원</td><td>4,255만 원</td><td class="em">6,130만 원</td><td class="em">7,000만 원</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout">
+      <p>2026년 3월 <strong>7,000만 원 달성</strong>으로 오픈 초기(690만 원) 대비 +900% 이상 성장. 직원 교육 표준화와 원액 병행 판매(객단가 29,000원)를 통해 추가 성장 여력이 확인되고 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section id="conclusion">
+  <div class="wrap">
+    <p class="chapter-num">08 — 결론</p>
+    <h2>의사결정을 위한<br>세 가지 이유</h2>
+    <div class="conclusion-grid">
+      <div class="conc-card">
+        <div class="conc-num">01</div>
+        <div>
+          <p class="conc-title">트렌드를 가장 먼저, 가장 완성도 있게 선보이는 것</p>
+          <p class="conc-body">버섯커피는 미국에서 이미 연간 수천억 원 규모를 형성한 검증된 카테고리입니다. RYZE·Everyday Dose의 성공은 한국에서 곧 재현될 트렌드입니다. 트웰브가 SANS와 함께 이 카테고리를 국내 최초 프리미엄 공간에서 선보이는 것은 선점의 기회입니다.</p>
+        </div>
+      </div>
+      <div class="conc-card">
+        <div class="conc-num">02</div>
+        <div>
+          <p class="conc-title">트웰브 웰니스 철학의 음료 카테고리 완성</p>
+          <p class="conc-body">기존 커피 브랜드들이 하지 못하는 — 원두·카페인 없는 기능성 음료 경험 — 그 웰니스 카페 카테고리의 빈자리를 SANS가 정확히 채웁니다. 홍삼, 동충하초, 영지버섯 등 검증된 원료의 유용성을 원더바와 동일한 방식으로 커뮤니케이션할 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="conc-card">
+        <div class="conc-num">03</div>
+        <div>
+          <p class="conc-title">솔루블 파우더 공급 — 일관된 품질과 운영 효율</p>
+          <p class="conc-body">SANS는 솔루블 파우더 형태로 공급됩니다. 바리스타 숙련도에 관계없이 일관된 맛을 제공하며, 유통기한 2년으로 재고 관리가 용이합니다. 액상 대비 무게가 80% 이상 절감되어 보관 공간과 물류 비용도 효율적입니다. 레시피 변경 없이 기능성 원료를 조합해 메뉴를 확장할 수 있어 트웰브의 다양한 시즌 프로그램에 유연하게 대응 가능합니다.</p>
+        </div>
+      </div>
+    </div>
+    <hr class="rule-heavy">
+    <div class="contact-section">
+      <p class="contact-eyebrow">문의</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <p class="contact-role">CEO</p>
+          <p class="contact-name">김경훈</p>
+          <p class="contact-info">010.8261.3027</p>
+          <p class="contact-info"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e68d9f8d8e8d8f8ba6818b878f8ac885898b">[email&#160;protected]</a></p>
+        </div>
+        <div class="contact-card">
+          <p class="contact-role">COO</p>
+          <p class="contact-name">이준상</p>
+          <p class="contact-info">010.8666.1019</p>
+          <p class="contact-info"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5bfa6b9b0b095a2b4beb0b6baa7a5fbb6bab8">[email&#160;protected]</a></p>
+        </div>
+        <div class="contact-card">
+          <p class="contact-role">담당</p>
+          <p class="contact-name">김래린 대리</p>
+          <p class="contact-info">010.2707.2327</p>
+          <p class="contact-info"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7d3cbcccecae7d0c6ccc2c4c8d5d789c4c8ca">[email&#160;protected]</a></p>
+        </div>
+      </div>
+      <p class="contact-conf">본 문서는 트웰브(하우스오브신세계) 경영진 검토용으로 작성되었습니다.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">SANS</p>
+      <p class="footer-sub">POST-COFFEE 문화를 만들어가는 국내 최초 대체커피 스타트업</p>
+    </div>
+    <div class="footer-meta">
+      <p>하우스오브신세계 청담 × SANS</p>
+      <p>Partnership Proposal · 2026</p>
+      <p>CONFIDENTIAL</p>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.querySelectorAll('.table-scroll').forEach(function(el) {
+  // 화살표 div 삽입
+  var arrow = document.createElement('div');
+  arrow.className = 'scroll-arrow';
+  el.style.position = 'relative';
+  el.appendChild(arrow);
+
+  function check() {
+    if (el.scrollWidth > el.clientWidth + 4) {
+      el.classList.add('has-scroll');
+      el.classList.remove('no-scroll');
+    } else {
+      el.classList.remove('has-scroll');
+  .conclusion-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 28px 0; }
 .conc-card { background: var(--bg); padding: 28px 32px; display: grid; grid-template-columns: 46px 1fr; gap: 20px; align-items: start; }
 .conc-num { font-family: var(--font-display); font-style: italic; font-size: 36px; color: var(--rule); line-height: 1; }
 .conc-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
