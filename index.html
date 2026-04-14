@@ -47,6 +47,7 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,248,0.95)
 hr.rule { border: none; border-top: 1px solid var(--rule); margin: 36px 0; }
 hr.rule-heavy { border: none; border-top: 1px solid var(--ink); margin: 36px 0; }
 .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.validation-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
 .callout { background: var(--highlight); border-left: 2px solid var(--ink); padding: 20px 24px; margin: 28px 0; }
 .callout p { color: var(--ink); margin: 0; }
 .pull-quote { padding: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin: 36px 0; }
@@ -171,7 +172,7 @@ footer { padding: 56px 0; background: var(--ink); }
   .kpi-value { font-size: 19px; }
   .kpi-label { font-size: 10.5px; }
   /* Single column */
-  .cols-2, .verdict-row, .review-grid, .product-grid { grid-template-columns: 1fr; }
+  .cols-2, .validation-cols, .verdict-row, .review-grid, .product-grid { grid-template-columns: 1fr; }
   /* Verdict stacked */
   .verdict-row { background: var(--bg); gap: 0; }
   .verdict { border-bottom: 1px solid var(--rule); }
@@ -211,6 +212,7 @@ footer { padding: 56px 0; background: var(--ink); }
   .kpi-label { font-size: 10px; }
   /* 2열 그리드는 유지 */
   .cols-2 { gap: 20px; }
+  .validation-cols { grid-template-columns: 1fr; gap: 28px; }
   /* 테이블 폰트 줄여서 안에 들어오게 */
   .data-table { font-size: 11.5px; min-width: 0; }
   .data-table th { font-size: 9px; padding: 8px 10px; }
@@ -449,6 +451,7 @@ footer { padding: 56px 0; background: var(--ink); }
           </tbody>
         </table>
         <p style="font-size:12px;color:var(--ink-light);margin-top:8px;">초기 투자: 네이버스노우 김창욱, 네이버웹툰 김준구, 라인프렌즈 김성훈 대표</p>
+        <hr class="rule" style="margin-top:20px;">
       </div>
     </div>
     <hr class="rule">
@@ -521,7 +524,7 @@ footer { padding: 56px 0; background: var(--ink); }
       </div>
     <hr class="rule">
     <h3>맛 개발 과정 — 검증의 기록</h3>
-    <div class="cols-2">
+    <div class="validation-cols">
       <div>
         <h3>3,000명 블라인드 테스트</h3>
         <ul class="info-list">
