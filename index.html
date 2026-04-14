@@ -203,7 +203,7 @@ footer { padding: 56px 0; background: var(--ink); }
 }
 
 /* ── 가로모드 (landscape) ─────────────────────────── */
-@media (max-width: 900px) and (orientation: landscape) {
+@media (max-width: 1024px) and (orientation: landscape) {
   .wrap { padding: 0 28px; } .nav-inner { padding: 8px 28px 6px; }
   section { padding: 52px 0; }
   /* KPI 가로 4열 유지하되 작게 */
@@ -212,7 +212,7 @@ footer { padding: 56px 0; background: var(--ink); }
   .kpi-label { font-size: 10px; }
   /* 2열 그리드는 유지 */
   .cols-2 { gap: 20px; }
-  .validation-cols { grid-template-columns: 1fr; gap: 28px; }
+  .validation-cols { grid-template-columns: 1fr !important; gap: 28px; }
   /* 테이블 폰트 줄여서 안에 들어오게 */
   .data-table { font-size: 11.5px; min-width: 0; }
   .data-table th { font-size: 9px; padding: 8px 10px; }
@@ -439,6 +439,7 @@ footer { padding: 56px 0; background: var(--ink); }
       </div>
       <div>
         <h3>투자 현황 — Pre-A 총 53억 완료</h3>
+        <hr class="rule" style="margin-top:4px;margin-bottom:16px;">
         <table class="invest-table">
           <tbody>
             <tr><td>신세계 시그나이트</td><td>15억</td><td style="font-size:12px;color:var(--ink-light);padding-left:10px;">그룹 CVC</td></tr>
@@ -451,7 +452,6 @@ footer { padding: 56px 0; background: var(--ink); }
           </tbody>
         </table>
         <p style="font-size:12px;color:var(--ink-light);margin-top:8px;">초기 투자: 네이버스노우 김창욱, 네이버웹툰 김준구, 라인프렌즈 김성훈 대표</p>
-        <hr class="rule" style="margin-top:20px;">
       </div>
     </div>
     <hr class="rule">
