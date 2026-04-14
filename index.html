@@ -631,22 +631,22 @@ footer { padding: 56px 0; background: var(--ink); }
         <tr>
           <td class="em">30~40대 고소득 여성</td>
           <td>피부 광채·탄력 유지</td>
-          <td>비타민C, 비타민E, 아연, 비오틴, 히알루론산</td>
+          <td>콜라겐, 글루타치온, 비타민C, 히알루론산</td>
         </tr>
         <tr>
           <td class="em">항노화·바이오해킹 관심층</td>
-          <td>세포 활력·산화 스트레스 완화</td>
-          <td>비타민C, 비타민E, 셀레늄, 아연, 마그네슘</td>
+          <td>세포 활력·역노화</td>
+          <td>NR(니코틴아마이드 리보사이드), 레스베라트롤, CoQ10</td>
         </tr>
         <tr>
           <td class="em">웰니스 루틴 직장인</td>
-          <td>에너지 밸런스·피로 완화</td>
-          <td>비타민B군 (B1·B2·B6·B12), 마그네슘, 판토텐산</td>
+          <td>에너지 밸런스·스트레스 완화</td>
+          <td>레몬밤, 아쉬와간다, 마그네슘, 영지버섯</td>
         </tr>
         <tr>
           <td class="em">임산부·카페인 민감층</td>
-          <td>무카페인 + 면역·컨디션 유지</td>
-          <td>비타민C, 비타민D, 아연, 엽산, 칼슘</td>
+          <td>무카페인 + 면역 지원</td>
+          <td>홍삼, 동충하초, 노루궁뎅이버섯 (카페인 Zero)</td>
         </tr>
       </tbody>
     </table></div>
@@ -654,7 +654,7 @@ footer { padding: 56px 0; background: var(--ink); }
     <hr class="rule">
     <div class="func-note" style="margin-top:0;">
       <p class="func-note-title">납품 단가 안내</p>
-      <p>현재 공장 준공 일정에 맞춰 단가를 확정 중입니다. 기능성 성분 구성에 따라 차이가 있으나, <strong>16oz 잔당 700~900원 수준</strong>을 목표로 하고 있습니다. 원두 커피 대비 원재료 수급이 기후 영향을 받지 않아 가격 안정성이 높습니다. 기능성 포뮬러 추가 시에도 일반적인 기능성 원료(비타민·미네랄류) 범위 내에서라면 이 단가 내 조율이 가능합니다.</p>
+      <p>현재 공장 준공 일정에 맞춰 단가를 확정 중입니다. 기능성 성분 구성에 따라 차이가 있으나, <strong>16oz 잔당 700~900원 수준</strong>을 목표로 하고 있습니다. 원두 커피 대비 원재료 수급이 기후 영향을 받지 않아 가격 안정성이 높습니다. 기능성 포뮬러 추가 시 비타민·미네랄 등 일반 기능성 원료 범위 내에서는 이 단가 내 조율이 가능하며, 홍삼·NR 등 고기능성 원료 적용 시에는 별도 협의가 필요합니다.</p>
     </div>
   </div>
 </section>
@@ -766,14 +766,15 @@ window.addEventListener('resize', updateScrollIndicators);
 document.querySelectorAll('.table-scroll').forEach(function(wrap) {
   wrap.addEventListener('scroll', updateScrollIndicators, {passive: true});
 });
-</script>
+
+// 네비게이션 스크롤 & 액티브
+(function(){
   var ids = ['summary','market','players','sans','twelve','partnership','traction','conclusion'];
   var links = {};
   ids.forEach(function(id){
     var a = document.querySelector('.nav-links a[href="#'+id+'"]');
     if(a) links[id] = a;
   });
-  // smooth scroll
   ids.forEach(function(id){
     var a = links[id];
     if(!a) return;
@@ -786,7 +787,6 @@ document.querySelectorAll('.table-scroll').forEach(function(wrap) {
       window.scrollTo({top: top, behavior: 'smooth'});
     });
   });
-  // active state
   function onScroll(){
     var navH = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 70;
     var scrollY = window.pageYOffset + navH + 20;
